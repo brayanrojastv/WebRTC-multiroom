@@ -2,6 +2,7 @@ const HTTPS_PORT = 8443;
 
 const fs = require('fs');
 const uuid = require('uuid');
+const cors = require('cors');
 const uniqId = require('uniqid');
 const path = require('path');
 const https = require('https');
@@ -11,6 +12,8 @@ const serverConfig = {
 	key: fs.readFileSync(path.join(__dirname, 'key.pem')),
 	cert: fs.readFileSync(path.join(__dirname, 'cert.pem'))
 };
+
+app.use(cors());
 
 const httpsServer = https.createServer(serverConfig, app);
 httpsServer.listen(HTTPS_PORT, '0.0.0.0', () => {
